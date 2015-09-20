@@ -1,0 +1,2 @@
+# Animatics
+Declarative animations
