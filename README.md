@@ -163,6 +163,7 @@ Pay attention to fact that CALayer animators are not supporing spring animation 
 | ScaleAnimator              | CGFloat                | UIView| 
 | RotateAnimator              | CGFloat                | UIView| 
 | TransformAnimator              | CGAffineTransform                | UIView| 
+| AdditiveTransformAnimator              | CGAffineTransform                | UIView| 
 | BackgroundColorAnimator              | UIColor                | UIView| 
 | TintColorAnimator              | UIColor                | UIView| 
 ...and more to come!:)
