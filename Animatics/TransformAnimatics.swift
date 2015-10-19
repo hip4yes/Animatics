@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TransformAnimator: AnimationSettingsHolder, AnimaticsViewChangesPerformer {
+class ViewTransformAnimatics: AnimationSettingsHolder, AnimaticsViewChangesPerformer {
    typealias TargetType = UIView
    typealias ValueType = CGAffineTransform
    
@@ -17,7 +17,15 @@ class TransformAnimator: AnimationSettingsHolder, AnimaticsViewChangesPerformer 
    
    required init(_ v: ValueType){ value = v }
    
-   func _updateForTarget(t: TargetType){ t.transform = value }
+   func _updateForTarget(t: TargetType){ fatalError() }
+}
+
+class TransformAnimator: ViewTransformAnimatics{
+   override func _updateForTarget(t: TargetType) { t.transform = value }
+}
+
+class AdditiveTransformAnimator: ViewTransformAnimatics {
+   override func _updateForTarget(t: TargetType) { t.transform = CGAffineTransformConcat(t.transform, value) }
 }
 
 class ScaleAnimator: ViewFloatAnimatics {

@@ -84,6 +84,48 @@ final class SequentialAnimationsTargetWaiter<T: AnimaticsTargetWaiter, U: Animat
    }
 }
 
+final class RepeatAnimator: AnimaticsReady, AnimaticsSettingsSettersWrapper{
+   let animator: AnimaticsReady
+   let repeatCount: Int
+   
+   init(animator: AnimaticsReady, repeatCount: Int){
+      self.animator = animator
+      self.repeatCount = repeatCount
+   }
+   
+   func animateWithCompletion(completion: AnimaticsCompletionBlock?) {
+      animateWithCompletion(completion, repeatsLeft: repeatCount)
+   }
+   
+   private func animateWithCompletion(completion: AnimaticsCompletionBlock?, repeatsLeft: Int){
+      if repeatsLeft == 0 {
+         completion?(true)
+         return
+      }
+      animator.animateWithCompletion { (_)  in
+         self.animateWithCompletion(completion, repeatsLeft: repeatsLeft - 1)
+      }
+   }
+
+   
+   func getSettingsSetters() -> [AnimaticsSettingsSetter] { return [animator] }
+}
+
+final class EndlessAnimator: AnimaticsReady, AnimaticsSettingsSettersWrapper{
+   let animator: AnimaticsReady
+   
+   init(_ animator: AnimaticsReady){
+      self.animator = animator
+   }
+   
+   func animateWithCompletion(completion: AnimaticsCompletionBlock?) {
+      animator.animateWithCompletion { [weak self] _ in self?.animateWithCompletion(completion) }
+   }
+   
+   func getSettingsSetters() -> [AnimaticsSettingsSetter] { return [animator] }
+
+}
+
 func +(left: AnimaticsReady, right: AnimaticsReady) -> AnimaticsReady{
    return SimultaneousAnimations(firstAnimator: left, secondAnimator: right)
 }
