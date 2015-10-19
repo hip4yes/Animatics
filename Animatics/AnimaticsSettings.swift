@@ -67,22 +67,22 @@ protocol AnimaticsSettingsSettersWrapper: AnimaticsSettingsSetter {
 
 extension AnimaticsSettingsSettersWrapper{
    func duration(d: NSTimeInterval) -> Self{
-      getSettingsSetters().each { $0.duration(d) }
+      for s in getSettingsSetters(){ s.duration(d) }
       return self
    }
    
    func delay(d: NSTimeInterval) -> Self{
-      getSettingsSetters().each { $0.delay(d) }
+      for s in getSettingsSetters(){ s.delay(d) }
       return self
       
    }
    func baseAnimation(o: UIViewAnimationOptions = UIViewAnimationOptions.CurveEaseInOut) -> Self{
-      getSettingsSetters().each { $0.baseAnimation(o) }
+      for s in getSettingsSetters(){ s.baseAnimation(o) }
       return self
    }
    
    func springAnimation(dumping: CGFloat = 0.8, velocity: CGFloat = 0) -> Self{
-      getSettingsSetters().each { $0.springAnimation(dumping, velocity: velocity) }
+      for s in getSettingsSetters(){ s.springAnimation(dumping, velocity: velocity) }
       return self
    }
 }
