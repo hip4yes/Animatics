@@ -36,15 +36,16 @@ to chaining complex animations like lifting view up, moving it and lifting back:
 let liftUp = ScaleAnimator(1.2) + ShadowRadiusAnimator(2)
 let move = DXAnimator(150)
 let liftBack = ScaleAnimator(1) + ShadowRadiusAnimator(0)
-(liftUp |-> move |-> liftBack) ~> testView
+(liftUp |-> move |-> liftBack) ~> targetView
+//make sure that targetView.layer.shadowOpacity > 0!
 ```
 you can also set specific settings for a single animator:
 ```
-AlphaAnimator(0).duration(0.7).delay(0.7) ~> testView
+AlphaAnimator(0).duration(0.7).delay(0.7) ~> targetView
 ```
 and to group animation as a whole:
 ```
-(liftUp |-> move |-> liftBack).duration(0.5).baseAnimation(.CurveEaseInOut) ~> testView
+(liftUp |-> move |-> liftBack).duration(0.5).baseAnimation(.CurveEaseInOut) ~> targetView
 ```
 You can easily compose animation based on conditions:
 ```
