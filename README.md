@@ -133,6 +133,37 @@ In the same way you can also set setting to the group of animations:
 ((AlphaAnimator(1) + XAnimator(200)).duration(0.8) |-> AlphaAnimator(0)).baseAnimation(.CurveLinear) ~> targetView
 //Both AlphaAnimator and XAnimator will have duration = 0.8, and all three animators will have baseAnimation(.CurveLinear)
 ```
+##Available animators
+| Name                             | Constructor value type | Target type |
+| -------------------------------- |:----------------------:|:-----:|
+| XAnimator              | CGFloat                | UIView| 
+| DXAnimator     | CGFloat      |   UIView |
+| YAnimator  | CGFloat     |    UIView | 
+| DYAnimator  | CGFloat   |    UIView |
+| WidthAnimator  | CGFloat      |    UIView |
+| DWidthAnimator  | CGFloat      |    UIView |
+| HeightAnimator  | CGFloat      |    UIView |
+| DHeightAnimator  | CGFloat      |    UIView |
+| AlphaAnimator  | CGFloat      |    UIView |
+| OriginAnimator  | CGPoint      |    UIView | |
+| DOriginAnimator  | CGPoint      |    UIView | |
+| CenterAnimator  | CGPoint      |    UIView | |
+| SizeAnimator  | CGSize      |    UIView | |
+| FrameAnimator  | CGRect      |    UIView | |
+| ShadowRadiusAnimator   | CGFloat                | UIView| 
+| ShadowOpacityAnimator  | CGFloat                | UIView| 
+| CornerRadiusAnimator              | CGFloat                | UIView| 
+| BorderWidthAnimator              | CGFloat                | UIView| 
+| LayerTransformAnimatics              | CATransform3D                | UIView| 
+| BorderColorAnimator              | UIColor                | UIView| 
+| GradientLayerStartPointAnimator              | CGPoint                | CAGradientLayer| 
+| GradientLayerEndPointAnimator              | CGPoint                | CAGradientLayer| 
+| ScaleAnimator              | CGFloat                | UIView| 
+| RotateAnimator              | CGFloat                | UIView| 
+| TransformAnimator              | CGAffineTransform                | UIView| 
+| BackgroundColorAnimator              | UIColor                | UIView| 
+| TintColorAnimator              | UIColor                | UIView| 
+...and more to come!:)
 ##How to install?
 Just grab all .swift files and add them to your project
 ##Licence
