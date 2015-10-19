@@ -133,6 +133,7 @@ In the same way you can also set setting to the group of animations:
 ((AlphaAnimator(1) + XAnimator(200)).duration(0.8) |-> AlphaAnimator(0)).baseAnimation(.CurveLinear) ~> targetView
 //Both AlphaAnimator and XAnimator will have duration = 0.8, and all three animators will have baseAnimation(.CurveLinear)
 ```
+Pay attention to fact that CALayer animators are not supporing spring animation and UIViewAnimationOptions. These animators will ignore `baseAnimation(..)` and `springAnimation(..)`.
 ##Available animators
 | Name                             | Constructor value type | Target type |
 | -------------------------------- |:----------------------:|:-----:|
