@@ -42,6 +42,11 @@ final class ViewAnimationPerformer{
 
 protocol AnimaticsLayerChangesPerformer: Animatics{
    func _animationKeyPath() -> String
+   func _newValue() -> AnyObject
+}
+
+extension AnimaticsLayerChangesPerformer{
+   func _newValue() -> AnyObject { return value as! AnyObject }
 }
 
 extension AnimaticsLayerChangesPerformer where TargetType == UIView{
@@ -51,6 +56,12 @@ extension AnimaticsLayerChangesPerformer where TargetType == UIView{
 }
 
 extension AnimaticsLayerChangesPerformer where TargetType == CALayer{
+   func _animateWithTarget(t: TargetType, completion: AnimaticsCompletionBlock?){
+      LayerAnimationPerformer.sharedInstance.animate(self, target: t, completion: completion)
+   }
+}
+
+extension AnimaticsLayerChangesPerformer where TargetType == CAShapeLayer{
    func _animateWithTarget(t: TargetType, completion: AnimaticsCompletionBlock?){
       LayerAnimationPerformer.sharedInstance.animate(self, target: t, completion: completion)
    }
@@ -72,10 +83,26 @@ final class LayerAnimationPerformer{
    
    func animate<T: AnimaticsLayerChangesPerformer, U: CALayer>(animator: T, target: U, completion: AnimaticsCompletionBlock?){
       let key = animator._animationKeyPath()
+      
+      func createAnimation() -> CABasicAnimation{
+         if animator._isSpring{
+            if #available(iOS 9, *){
+               let animation = CASpringAnimation(keyPath: key)
+               animation.damping = animator._springDumping * 10
+               animation.initialVelocity = animator._springVelocity
+               animation.duration = animation.settlingDuration
+               return animation
+            }
+         }
+         let animation = CABasicAnimation(keyPath: key)
+         return animation
+      }
+
       let fromValue = target.valueForKeyPath(key)
-      target.setValue((animator.value as! AnyObject), forKeyPath: key)
+      target.setValue(animator._newValue(), forKeyPath: key)
       target.removeAnimationForKey(key)
       let animation = CABasicAnimation(keyPath: key)
+      
       animation.duration = animator._duration
       animation.beginTime = animator._delay
       animation.fromValue = fromValue

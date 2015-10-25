@@ -123,7 +123,10 @@ final class EndlessAnimator: AnimaticsReady, AnimaticsSettingsSettersWrapper{
    }
    
    func getSettingsSetters() -> [AnimaticsSettingsSetter] { return [animator] }
+}
 
+extension AnimaticsReady{
+   func endless() -> EndlessAnimator { return EndlessAnimator(self) }
 }
 
 func +(left: AnimaticsReady, right: AnimaticsReady) -> AnimaticsReady{
@@ -141,3 +144,5 @@ func +<T: AnimaticsTargetWaiter, U: AnimaticsTargetWaiter where T.TargetType == 
 func |-><T: AnimaticsTargetWaiter, U: AnimaticsTargetWaiter where T.TargetType == U.TargetType>(left: T, right: U) -> SequentialAnimationsTargetWaiter<T, U>{
    return SequentialAnimationsTargetWaiter(firstAnimator: left, secondAnimator: right)
 }
+
+

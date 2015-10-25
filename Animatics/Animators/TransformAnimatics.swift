@@ -32,6 +32,25 @@ class ScaleAnimator: ViewFloatAnimatics {
    override func _updateForTarget(t: TargetType) { t.transform = CGAffineTransformMakeScale(value, value) }
 }
 
+class AdditiveScaleAnimator: ViewFloatAnimatics{
+   override func _updateForTarget(t: TargetType) { t.transform = CGAffineTransformConcat(t.transform, CGAffineTransformMakeScale(value, value)) }
+}
+
 class RotateAnimator: ViewFloatAnimatics {
+   convenience init(_ v: Double) { self.init(CGFloat(v)) }
    override func _updateForTarget(t: TargetType) { t.transform = CGAffineTransformMakeRotation(value) }
 }
+
+class AdditiveRotateAnimator: ViewFloatAnimatics {
+   convenience init(_ v: Double) { self.init(CGFloat(v)) }
+   override func _updateForTarget(t: TargetType) { t.transform = CGAffineTransformConcat(t.transform, CGAffineTransformMakeRotation(value)) }
+}
+
+class XTranslateAnimator: ViewFloatAnimatics{
+   override func _updateForTarget(t: TargetType) { t.transform = CGAffineTransformMakeTranslation(value, 0) }
+}
+
+class YTranslateAnimator: ViewFloatAnimatics{
+   override func _updateForTarget(t: TargetType) { t.transform = CGAffineTransformMakeTranslation(0, value) }
+}
+
