@@ -162,10 +162,23 @@ Pay attention to fact that CALayer animators are not supporing spring animation 
 | GradientLayerEndPointAnimator              | CGPoint                | CAGradientLayer| 
 | ScaleAnimator              | CGFloat                | UIView| 
 | RotateAnimator              | CGFloat                | UIView| 
+| AdditiveScaleAnimator              | CGFloat                | UIView| 
+| AdditiveRotateAnimator              | CGFloat                | UIView| 
+| XTranslateAnimator              | CGFloat                | UIView| 
+| YTranslateAnimator              | CGFloat                | UIView| 
 | TransformAnimator              | CGAffineTransform                | UIView| 
 | AdditiveTransformAnimator              | CGAffineTransform                | UIView| 
 | BackgroundColorAnimator              | UIColor                | UIView| 
 | TintColorAnimator              | UIColor                | UIView| 
+| StrokeStartAnimator              | CGFloat                | CAShapeLayer| 
+| StrokeEndAnimator              | CGFloat                | CAShapeLayer| 
+| LineWidthAnimator              | CGFloat                | CAShapeLayer| 
+| MitterLimitAnimator              | CGFloat                | CAShapeLayer| 
+| LineDashPhaseAnimator              | CGFloat                | CAShapeLayer| 
+| FillColorAnimator              | UIColor                | CAShapeLayer| 
+| StrokeColorAnimator              | UIColor                | CAShapeLayer| 
+
+
 ...and more to come!:)
 ##How to install?
 Just grab all .swift files and add them to your project
